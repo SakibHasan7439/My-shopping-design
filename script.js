@@ -74,14 +74,14 @@ const displayCategory = (categories) =>{
         btn.innerHTML = `${category}`;
 
         btn.addEventListener("click", ()=>{
-            document.getElementById("showSpinner").classList.remove("hidden");
-            document.getElementById("product-container").classList.add("hidden");
+            loadCategoryVideos(category);
+            hideClass("showSpinner");
+            showClass("product-container");
             document.getElementById("product-container").classList.remove("grid");
 
             setTimeout(()=>{
-                loadCategoryVideos(category);
-                document.getElementById("showSpinner").classList.add("hidden");
-                document.getElementById("product-container").classList.remove("hidden");
+                showClass("showSpinner");
+                hideClass("product-container");
                 document.getElementById("product-container").classList.add("grid");
 
             }, 2000);
@@ -100,6 +100,14 @@ document.getElementById("reload-btn").addEventListener("click", ()=>{
 // document.getElementById("search").addEventListener("keyup", (event)=>{
 //     loadProducts(event.target.value);
 // })
+
+const showClass = (id) =>{
+    document.getElementById(id).classList.add("hidden");
+}
+
+const hideClass = (id) =>{
+    document.getElementById(id).classList.remove("hidden");
+}
 
 loadCategories();
 loadProducts();
