@@ -84,7 +84,9 @@ const displayCategory = (categories) =>{
     });
 }
 
-
+document.getElementById("reload-btn").addEventListener("click", ()=>{
+    location.reload();
+});
 
 loadCategories();
 loadProducts();
