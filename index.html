@@ -6,6 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@latest/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>My own practice</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="w-11/12 mx-auto">
@@ -15,7 +16,7 @@
             </div>
             <div class="flex-none gap-2">
               <div class="form-control">
-                <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                <input id="search" type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
               </div>
               <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -43,8 +44,9 @@
     </header>
 
     <main>
-        <div id="categories" class="flex justify-center gap-2 mb-12"></div>
+        <div id="categories" class="md:flex justify-center gap-2 mb-12"></div>
         <section id="product-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></section>
+        <div id="showSpinner" class="spinner hidden"></div>
     </main>
 
     <!-- Open the modal using ID.showModal() method -->

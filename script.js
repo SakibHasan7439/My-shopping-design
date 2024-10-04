@@ -1,6 +1,6 @@
-const loadProducts = async() =>{
+const loadProducts = async(searchText="") =>{
     try {
-        const res = await fetch('https://fakestoreapi.com/products');
+        const res = await fetch(`https://fakestoreapi.com/products?title=${searchText}`);
         const data = await res.json(); 
         displayProduct(data);
 
@@ -51,8 +51,6 @@ const showDetails = (details) =>{
         <img class="mb-3 h-[300px] object-cover" src="${details?.image}" alt="image"/>
         <p>${details?.description}</p>
     `
-
-
     document.getElementById("customModal").showModal();
     
 }
@@ -66,7 +64,6 @@ const loadCategories = async() =>{
 const loadCategoryVideos = async(category) =>{
     const res = await fetch(`https://fakestoreapi.com/products/category/${category}`);
     const data = await res.json();
-    console.log(data);
     displayProduct(data);
 }
 
@@ -75,8 +72,20 @@ const displayCategory = (categories) =>{
         const btn = document.createElement("button");
         btn.classList.add("bg-orange-500", "active:bg-orange-700", "py-2", "px-4", "rounded-md", "text-white");
         btn.innerHTML = `${category}`;
+
         btn.addEventListener("click", ()=>{
-            loadCategoryVideos(category);
+            document.getElementById("showSpinner").classList.remove("hidden");
+            document.getElementById("product-container").classList.add("hidden");
+            document.getElementById("product-container").classList.remove("grid");
+
+            setTimeout(()=>{
+                loadCategoryVideos(category);
+                document.getElementById("showSpinner").classList.add("hidden");
+                document.getElementById("product-container").classList.remove("hidden");
+                document.getElementById("product-container").classList.add("grid");
+
+            }, 2000);
+            
         });
 
         const categories = document.getElementById("categories");
@@ -87,6 +96,10 @@ const displayCategory = (categories) =>{
 document.getElementById("reload-btn").addEventListener("click", ()=>{
     location.reload();
 });
+
+// document.getElementById("search").addEventListener("keyup", (event)=>{
+//     loadProducts(event.target.value);
+// })
 
 loadCategories();
 loadProducts();
